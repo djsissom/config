@@ -382,7 +382,7 @@ case "$host" in
 		alias umountvuspace="/sbin/umount.cifs ~/vuspace"
 		;;
 	( linux   )
-		alias open='kde-open'
+		alias open='kde-open5'
 		alias ssh='eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && ssh'
 		alias scp='eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && scp'
 		my_git() {
