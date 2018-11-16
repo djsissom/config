@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/djsissom/Projects/Web/openquestion.io/src/blog'
+let g:netrw_dirhist_2='/home/djsissom/Projects/Web/openquestion.io/.git'
+let g:netrw_dirhist_3='/home/djsissom/Projects/Web/openquestion.io/.gitignores'
+let g:netrw_dirhist_4='/home/djsissom/Projects/Web/openquestion.io/src/blog'
+let g:netrw_dirhist_5='/home/djsissom/Projects/GitHub/Paper/style'
+let g:netrw_dirhist_6='/home/djsissom/Projects/GitHub/MLPredict/analysis'
+let g:netrw_dirhist_7='/home/djsissom/Projects/Programs/Analysis/Mesh'
+let g:netrw_dirhist_8='/home/djsissom/Projects/Programs/Analysis/Astro/ttow'
+let g:netrw_dirhist_9='/home/djsissom/.vim'
