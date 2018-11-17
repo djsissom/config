@@ -214,6 +214,8 @@ case "$host" in
 	( osx     )
 		path=(/opt/local/bin:/opt/local/sbin				# Macports path
 		      ~/Local/bin									# User specific path
+			  /usr/local/opt/coreutils/libexec/gnubin		# Gnu coreutils from Homebrew
+			  /usr/local/opt/python/libexec/bin				# Unversioned python3
 			  $path)
 		export -UT PYTHONPATH=~/Local/lib/python/latest/site-packages:$PYTHONPATH pythonpath
 		;;
@@ -396,9 +398,12 @@ case "$host" in
 		alias usage='/home/djsissom/Local/src/comcast-bw/comcastBandwidth.py'
 		;;
 	( osx     )
-		alias ls='ls -G'
+		#alias ls='ls -G'
+		alias ls='ls --color --literal'
 		alias top='top -o cpu'
-		alias ssh 'if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add; fi  && ssh'
+		alias ssh='if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add -t 28800; fi  && ssh'
+		alias rsync='if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add -t 28800; fi  && rsync'
+		alias man='man -M /usr/local/opt/coreutils/libexec/gnuman:$MANPATH'
 		;;
 esac
 
