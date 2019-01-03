@@ -353,6 +353,9 @@ alias scan-tray='scanimage --format=tiff --device "brother4:bus4;dev1"  --resolu
 alias merge_pdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf'
 alias watch_traffic="bmon -p eth1,eth0 -b -o curses:'nocolors;bgchar= '"
 alias weather="curl http://wttr.in/Nashville"
+alias fp='for i in *.flac; do ffprobe $i 2>&1; done'
+alias fa='for i in *.flac; do ffprobe $i 2>&1 | grep -i artist; done'
+alias fcomp='for i in *.flac; do ffprobe $i 2>&1 | grep -i composer; done'
 make_thumbs() { vcsi -g 5x4 -w 1920 -t --grid-spacing 0 "$*"; }
 make_thumbs_big() { vcsi -g 5x20 -w 1920 -t --grid-spacing 0 "$*"; }
 
