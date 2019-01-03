@@ -351,7 +351,7 @@ alias batch-unzip='for i in *.zip; do newdir="$i:gs/.zip/"; mkdir "$newdir"; unz
 alias scan-flatbed='scanimage --format=tiff --device "brother4:bus4;dev1"  --resolution 600 --source FlatBed'
 alias scan-tray='scanimage --format=tiff --device "brother4:bus4;dev1"  --resolution 600'
 alias merge_pdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf'
-alias watch_traffic="bmon -p eth1,eth0 -b -o curses:'nocolors;bgchar= '"
+alias netmon="bmon -p eth1,eth0 -b -o curses:'nocolors;bgchar= '"
 alias weather="curl http://wttr.in/Nashville"
 alias fp='for i in *.flac; do ffprobe $i 2>&1; done'
 alias fa='for i in *.flac; do ffprobe $i 2>&1 | grep -i artist; done'
