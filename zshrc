@@ -356,6 +356,7 @@ alias weather="curl http://wttr.in/Nashville"
 alias fp='for i in *.flac; do ffprobe $i 2>&1; done'
 alias fa='for i in *.flac; do ffprobe $i 2>&1 | grep -i artist; done'
 alias fcomp='for i in *.flac; do ffprobe $i 2>&1 | grep -i composer; done'
+alias mic="echo \"Starting jack mic input with 'alsa_in -d hw:0 -r 192000 -c 2 -p 128 -n 3'\" && alsa_in -d hw:0 -r 192000 -c 2 -p 128 -n 3"
 make_thumbs() { vcsi -g 5x4 -w 1920 -t --grid-spacing 0 "$*"; }
 make_thumbs_big() { vcsi -g 5x20 -w 1920 -t --grid-spacing 0 "$*"; }
 
