@@ -327,18 +327,22 @@ alias tree='tree -Chug'
 alias mv='mv -i'
 alias cp='cp -i'
 alias ds='du -hsc * | sort -h'
-#alias vim='vim -display none'  # keep from launching X11 on OS X over SSH sessions
+if [[ "${DISPLAY}" == localhost:?*.0 ]]; then
+	alias vim='/usr/bin/vim -display localhost:0'  # keep from launching X11 on OS X over SSH sessions
+fi
 alias truecrypt='truecrypt -t'
 alias kp="kpcli --kdb ~/Local/key/KeePass/master.kdbx --key ~/Local/key/master.key --histfile /dev/null"
 alias gamepad="xboxdrv --silent --detach-kernel-driver --mimic-xpad" # run as root
 alias todo='vim ~/.todo.tp'
 
 # random fun stuff
-alias tclock='tty-clock -sctb -d 0 -a 100000000 -C 6 -f "%Y/%m/%d"'
-alias blah='while true; do head -c8 /dev/urandom; sleep 0.01; done | hexdump -C'
-alias engage='play -r 44100 -c2 -n synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +16'
+alias tclock='tty-clock -sctb -d 0 -a 10000000 -C 6 -f "%Y/%m/%d"'
+alias blah='while true; do head -c8 /dev/urandom; sleep 0.02; done | hexdump -C'
+#alias engage='play -r 44100 -c2 -n synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +16'
+alias engage='play -c2 -n -t alsa synth whitenoise band -n 100 24 band -n 300 100 gain +16'
 #alias matrix='cmatrix -ab -u2'
 alias matrix='unimatrix -afo -s 95 -l nssssSScCgGkkkkkkkk'
+alias pipes='/usr/bin/pipes -t 3 -f 60 -r 8000'
 #alias mine='cgminer --scrypt -o stratum+tcp://middlecoin.com:3333 -u 1HoqBstSjv5kZrEyyHCGjReRpLf3TWTLPS -p asdfgqwert'
 alias mine-intense='cudaminer --interactive=0 --algo=scrypt -o stratum+tcp://middlecoin.com:3333 -u 1HoqBstSjv5kZrEyyHCGjReRpLf3TWTLPS -p asdfgqwert'
 alias mine='cudaminer --interactive=1 --algo=scrypt -o stratum+tcp://middlecoin.com:3333 -u 1HoqBstSjv5kZrEyyHCGjReRpLf3TWTLPS -p asdfgqwert'
@@ -348,7 +352,7 @@ alias xtv='xrandr --output HDMI-0 --auto --same-as DVI-I-1'
 alias chrome='google-chrome-stable'
 alias batch-unzip='for i in *.zip; do newdir="$i:gs/.zip/"; mkdir "$newdir"; unzip -d "$newdir" "$i"; done'
 #alias scanimage='scanimage --format=tiff --device pixma:04A91747_80650C --resolution 300'
-alias scan-flatbed='scanimage --format=tiff --device "brother4:bus4;dev1"  --resolution 600 --source FlatBed'
+alias scan-flatbed='scanimage --format=tiff --device "brother4:bus4;dev2"  --resolution 600 --source FlatBed'
 alias scan-tray='scanimage --format=tiff --device "brother4:bus4;dev1"  --resolution 600'
 alias merge_pdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf'
 alias netmon="bmon -p eth1,eth0 -b -o curses:'nocolors;bgchar= '"
@@ -356,10 +360,16 @@ alias weather="curl http://wttr.in/Nashville"
 alias fp='for i in *.flac; do ffprobe $i 2>&1; done'
 alias fa='for i in *.flac; do ffprobe $i 2>&1 | grep -i artist; done'
 alias fcomp='for i in *.flac; do ffprobe $i 2>&1 | grep -i composer; done'
-alias mic="echo \"Starting jack mic input with 'alsa_in -d hw:0 -r 192000 -c 2 -p 64 -n 3'\" && alsa_in -d hw:0 -r 192000 -c 2 -p 64 -n 3"
+alias rm-if-no-screen='for i in *; do if [ ! -e screens/"$i".jpg -a $i != "screens" ]; then rm -Iv $i; fi; done'
+alias mic="echo \"Starting jack mic input with 'alsa_in -j mic -d hw:USB -r 192000 -c 2 -p 512 -n 3'\" && alsa_in -j mic -d hw:USB -r 192000 -c 2 -p 512 -n 3"
+alias pic-dirs-by-date='for i in *.NEF; do dirname=`ll --time-style=full-iso $i | awk '\''{ print $6 }'\''`; mkdir -p $dirname; mv -v $i $dirname; done'
+if [[ "$TERM" == rxvt-unicode-256color ]]; then
+	alias catimg='catimg -t'
+fi
 make_thumbs() { vcsi -g 5x4 -w 1920 -t --grid-spacing 0 "$*"; }
 make_thumbs_big() { vcsi -g 5x20 -w 1920 -t --grid-spacing 0 "$*"; }
 say() { echo "$@" | festival --tts; }
+play_midi() { fluidsynth -a alsa -m alsa_seq -j -g 2 -l -i /usr/share/soundfonts/FluidR3_GM.sf2 "$*"; }
 
 # enable color support
 if [ -x /usr/bin/dircolors ]; then
