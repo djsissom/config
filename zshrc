@@ -363,7 +363,7 @@ alias fcomp='for i in *.flac; do ffprobe $i 2>&1 | grep -i composer; done'
 alias rm-if-no-screen='for i in *; do if [ ! -e screens/"$i".jpg -a $i != "screens" ]; then rm -Iv $i; fi; done'
 alias mic="echo \"Starting jack mic input with 'alsa_in -j mic -d hw:USB -r 192000 -c 2 -p 512 -n 3'\" && alsa_in -j mic -d hw:USB -r 192000 -c 2 -p 512 -n 3"
 alias pic-dirs-by-date='for i in *.NEF; do dirname=`ll --time-style=full-iso $i | awk '\''{ print $6 }'\''`; mkdir -p $dirname; mv -v $i $dirname; done'
-if [[ "$TERM" == rxvt-unicode-256color ]]; then
+if [[ "$TERM" == rxvt-unicode-256color || "$TERM" == xterm-256color ]]; then
 	alias catimg='catimg -t'
 fi
 make_thumbs() { vcsi -g 5x4 -w 1920 -t --grid-spacing 0 "$*"; }
