@@ -405,9 +405,9 @@ case "$host" in
 		alias scp='eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && scp'
 		my_git() {
 			case $* in
-				( push* ) shift; eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && git push "$@" ;;
-				( pull* ) shift; eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && git pull "$@" ;;
-				(     * ) git "$@" ;;
+				( push* ) shift; eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && /usr/bin/git push "$@" ;;
+				( pull* ) shift; eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && /usr/bin/git pull "$@" ;;
+				(     * ) /usr/bin/git "$@" ;;
 			esac
 		}
 		alias git='my_git'
