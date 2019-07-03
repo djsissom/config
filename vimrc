@@ -80,6 +80,8 @@ autocmd FileType plaintex,tex,latex set tw=80
 autocmd FileType pug,jade set tw=80
 autocmd FileType text set tw=80 nocindent
 
+set backspace=indent,eol,start
+
 au BufNewFile,BufRead *.cu set filetype=c
 au BufNewFile,BufRead *.tp set filetype=taskpaper
 
