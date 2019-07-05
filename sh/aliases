@@ -106,7 +106,7 @@ case "$host" in
 		;;
 	( osx     )
 		#alias ls='ls -G'
-		alias ls='ls --color --literal'
+		alias ls='ls --color=auto --literal'
 		alias top='top -o cpu'
 		alias ssh='if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add -t 28800; fi  && ssh'
 		alias rsync='if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add -t 28800; fi  && rsync'

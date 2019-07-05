@@ -177,10 +177,10 @@ typeset -U path
 
 case "$host" in
 	( cluster )
-		path=(/usr/local/supermongo/bin						# Supermongo path
-		      /usr/local/cuda/bin:							# Nvidia CUDA path
-		      /usr/lpp/mmfs/bin								# GPFS utilities path
-		      ~/local/bin:									# User-specific path
+		path=(/usr/local/supermongo/bin                     # Supermongo path
+		      /usr/local/cuda/bin                           # Nvidia CUDA path
+		      /usr/lpp/mmfs/bin                             # GPFS utilities path
+		      ~/local/bin                                   # User-specific path
 		      $path)
 		export -UT LD_LIBRARY_PATH=/usr/scheduler/torque/lib:$LD_LIBRARY_PATH ld_library_path
 		export -UT LD_LIBRARY_PATH=/usr/local/supermongo/lib:$LD_LIBRARY_PATH ld_library_path
@@ -192,9 +192,9 @@ case "$host" in
 		export -UT IDL_PATH=.:+/usr/local/idl/idl/lib:+/usr/local/idl/idl/:$IDL_PATH idl_path
 		;;
 	( astro   )
-		path=(/usr/local/python64/bin						# Python path (64 bit)
-		      ~/local/bin									# User specific path
-			  path)
+		path=(/usr/local/python64/bin                       # Python path (64 bit)
+		      ~/local/bin                                   # User specific path
+		      $path)
 		export -UT LD_LIBRARY_PATH=/usr/local/python64/lib:$LD_LIBRARY_PATH ld_library_path
 		export -UT PYTHONPATH=~/local/lib/python/latest/site-packages:$PYTHONPATH pythonpath
 		export -UT PYTHONPATH=/usr/local/python64/lib/python*/site-packages:$PYTHONPATH pythonpath
@@ -203,7 +203,7 @@ case "$host" in
 		export IDL_STARTUP=~/.idl/idl_startup.pro
 		;;
 	( linux   )
-		path=(~/Local/bin $path)							# User specific path
+		path=(~/Local/bin $path)                            # User specific path
 		export -UT PYTHONPATH=~/Local/lib/python/python-2.7/site-packages:$PYTHONPATH pythonpath
 		export -UT PYTHONPATH=~/Local/lib/python/latest/site-packages:$PYTHONPATH pythonpath
 		export -UT PYTHONPATH=~/Local/lib/python3/site-packages:$PYTHONPATH pythonpath
@@ -212,11 +212,15 @@ case "$host" in
 		export -UT BIBINPUTS=.:./style:$BIBINPUTS bibinputs
 		;;
 	( osx     )
-		path=(/opt/local/bin:/opt/local/sbin				# Macports path
-		      ~/Local/bin									# User specific path
-			  /usr/local/opt/coreutils/libexec/gnubin		# Gnu coreutils from Homebrew
-			  /usr/local/opt/python/libexec/bin				# Unversioned python3
-			  $path)
+		path=(~/Local/bin                                   # User specific path
+		      /usr/local/opt/coreutils/libexec/gnubin       # Gnu coreutils from Homebrew
+		      /usr/local/opt/findutils/libexec/gnubin       # Gnu find from Homebrew
+		      /usr/local/opt/grep/libexec/gnubin            # Gnu grep from Homebrew
+		      /usr/local/opt/gnu-sed/libexec/gnubin         # Gnu sed from Homebrew
+		      /usr/local/opt/gnu-indent/libexec/gnubin      # Gnu indent from Homebrew
+		      /usr/local/opt/gnu-tar/libexec/gnubin         # Gnu tar from Homebrew
+		      /usr/local/opt/python/libexec/bin             # Unversioned python3
+		      $path)
 		export -UT PYTHONPATH=~/Local/lib/python/latest/site-packages:$PYTHONPATH pythonpath
 		;;
 esac
