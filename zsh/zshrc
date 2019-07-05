@@ -342,6 +342,9 @@ growl() { echo -e $'\e]9;'${1}'\007' ; return ; }
 # End
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets root)  # options: main brackets pattern cursor root line
+#ZSH_HIGHLIGHT_STYLES[unknown-token]='none'  # example to customize main class tokens
 
 autoload -U colors && colors
 #source ~/.zsh/git-prompt/zshrc.sh
