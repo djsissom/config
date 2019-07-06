@@ -210,7 +210,11 @@ export path
 # Shell behavior
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-export EDITOR='vim -display none'      # Use vim as default text editor
+if [[ $host == osx ]]; then
+	export EDITOR='vim'                 # Use vim as default text editor
+else
+	export EDITOR='vim -display none'   # Use vim as default text editor
+fi
 export GPG_TTY=$(tty)           # Fix GPG pin prompt bug with git
 export SDL_VIDEO_FULLSCREEN_HEAD=3
 setopt HIST_IGNORE_SPACE
