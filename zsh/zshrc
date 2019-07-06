@@ -1,4 +1,3 @@
-[ -r ~/.aliases ] && . ~/.aliases # this is going to have to go above completion stuff
 # The following lines were added by compinstall
 
 zstyle ':completion:*' auto-description 'Specify parameter: %d'
@@ -321,7 +320,8 @@ setopt HIST_IGNORE_SPACE
 # Source alias definitions file
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# aliases file sourcing used to be here and will come back soon
+[ -r ~/.aliases ] && . ~/.aliases # this is going to have to go above completion stuff
+setopt complete_aliases
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
