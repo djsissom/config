@@ -88,29 +88,6 @@ fi
 #---------------
 
 
-#---------------
-#DIRSTACKFILE="$HOME/.cache/zsh/dirs"
-#if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
-#	dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-#	[[ -d $dirstack[1] ]] && cd $dirstack[1]
-#fi
-#chpwd() {
-#	print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
-#}
-#
-#DIRSTACKSIZE=20
-#
-#setopt autopushd pushdsilent pushdtohome
-#
-### Remove duplicate entries
-#setopt pushdignoredups
-#
-### This reverts the +/- operators.
-#setopt pushdminus
-#---------------
-
-
-
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -230,97 +207,20 @@ export path
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Bash behavior
+# Shell behavior
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#[ -z "$PS1" ] && return         # If not running interactively, exit here
 
 export EDITOR='vim -display none'      # Use vim as default text editor
 export GPG_TTY=$(tty)           # Fix GPG pin prompt bug with git
-#export HISTCONTROL=ignoreboth   # No duplicate or space-started lines in history
-#shopt -s histappend             # Append to the history file, don't overwrite it
-#shopt -s checkwinsize           # Update $LINES and $COLUMNS after each command
 export SDL_VIDEO_FULLSCREEN_HEAD=3
 setopt HIST_IGNORE_SPACE
-#setopt extended_glob
-
-
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## Enable advanced tab-completion
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
-## Define file paths for tab-completion scripts
-#case "$host" in 
-#	( cluster | astro )
-#		bash_completion_path=/usr/share/bash-completion/bash_completion
-#		git_completion_path=/etc/bash_completion.d/git
-#		;;
-#	( linux )
-#		bash_completion_path=/usr/share/bash-completion/bash_completion
-#		git_completion_path=/usr/share/git/completion/git-prompt.sh
-#		;;
-#	( osx )
-#		bash_completion_path=/opt/local/etc/bash_completion
-#		git_completion_path=/opt/local/etc/bash_completion.d/git
-#		;;
-#esac
-#
-## Source bash_completion script if available; otherwise, set completion manually
-#if [ -r "$bash_completion_path" ]; then
-#	. "$bash_completion_path"     # Source global definition file
-#elif [ -r ~/.bash_completion ]; then
-#	. ~/.bash_completion          # Look in ~ if global file doesn't exist
-#else
-#	complete -cf sudo             # Bash auto-completion after sudo
-#	complete -cf man              # Bash auto-completion after man
-#fi
-#
-## Enable bash tab completion for git commands, if available
-#if [ -r "$git_completion_path" ]; then
-#	. "$git_completion_path"
-#	git_prompt=yes                # This and the following enable the git prompt
-#	export GIT_PS1_SHOWDIRTYSTATE=1
-#	export GIT_PS1_SHOWSTASHSTATE=1
-#	export GIT_PS1_SHOWUNTRACKEDFILES=1
-#	export GIT_PS1_SHOWUPSTREAM="auto"
-#fi
-#
-#
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## Set up a fancy prompt and window title, if available
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
-## Use a colored prompt, if available
-#[ -t 1 ] && [ -n $(tput colors) ] && [ $(tput colors) -ge 8 ] && color_prompt=yes
-#
-## Choose username/hostname color based on whether or not we are the root user
-#UserColor="$BCyan"
-#[ $UID == "0" ] && UserColor="$BRed"
-#
-## Set prompt options based on capabilities
-#if [[ "$color_prompt" == yes && "$git_prompt" == yes ]]; then
-#	PS1='['${UserColor}'\u@\h'${Color_Off}':'${BBlue}'\w'${Green}'$(__git_ps1 " (git-%s) ")'${Color_Off}']\$ '
-#elif [[ "$color_prompt" == yes ]]; then
-#	PS1="[${UserColor}\u@\h${Color_Off}:${BBlue}\w${Color_Off}]\\$ "
-#elif [[ "$git_prompt" == yes ]]; then
-#	PS1='[\u@\h:\w$(__git_ps1 " (git-%s) ")]\$ '
-#else
-#	PS1='[\u@\h:\w]\$ '
-#fi
-#
-## If this is an xterm, set the title to user@host:dir
-#case "$TERM" in
-#	( xterm* | rxvt*  ) xterm_title="\[\e]0;\u@\h : \w\a\]" ;;
-#	( *               ) xterm_title= ;;
-#esac
-#PS1="${xterm_title}${PS1}"
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Source alias definitions file
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[ -r ~/.aliases ] && . ~/.aliases # this is going to have to go above completion stuff
+[ -r ~/.aliases ] && . ~/.aliases
 setopt complete_aliases
 
 
@@ -350,11 +250,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets root)  # options: main brackets pattern cur
 #ZSH_HIGHLIGHT_STYLES[unknown-token]='none'  # example to customize main class tokens
 
 autoload -U colors && colors
-#source ~/.zsh/git-prompt/zshrc.sh
-#PROMPT='|- %{$fg_no_bold[cyan]%}%n@%m%{$reset_color%} : %{$fg_no_bold[blue]%}%~%{$reset_color%} $(git_super_status)-> '
-#PROMPT="|- %{$fg_no_bold[cyan]%}%n@%m%{$reset_color%} : %{$fg_no_bold[blue]%}%~%{$reset_color%} -> "
 
-#autoload -U promptinit && promptinit
 autoload -Uz promptinit && promptinit
 PURE_GIT_PULL=0
 prompt pure
