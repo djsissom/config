@@ -116,111 +116,6 @@ autoload -U colors && colors
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Determine local environment
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-case $( uname ) in
-	( *[Ll]inux*  )
-		case "$HOSTNAME" in
-			( vmp*    ) hostenv='cluster';;  # Auto-detect whether we're running on the
-			( vpac*   ) hostenv='astro';;    # ACCRE cluster or the VPAC network at
-			( *       ) hostenv='linux';;    # Vanderbilt, and set options appropriately
-		esac;;
-	( *[Dd]arwin* ) hostenv='osx';;
-	( *           ) echo 'running on unknown host' && return;;
-esac
-
-
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Import packages
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-if [[ $hostenv == cluster ]]; then
-	setpkgs -a gcc_compiler
-	setpkgs -a intel_compiler
-	setpkgs -a fftw2-mpich2_gcc_ether
-	setpkgs -a mpich2_gcc_ether
-	setpkgs -a gsl_gcc
-	setpkgs -a gsl_intel
-	setpkgs -a hdf5
-	setpkgs -a valgrind
-	setpkgs -a python
-	setpkgs -a scipy
-	setpkgs -a perl
-	setpkgs -a idl-8.0
-	setpkgs -a matlab
-	setpkgs -a octave
-	setpkgs -a R
-	setpkgs -a ImageMagick
-fi
-
-
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Path definitions
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-typeset -U path
-
-case "$hostenv" in
-	( cluster )
-		path=(/usr/local/supermongo/bin                     # Supermongo path
-		      /usr/local/cuda/bin                           # Nvidia CUDA path
-		      /usr/lpp/mmfs/bin                             # GPFS utilities path
-		      ~/local/bin                                   # User-specific path
-		      $path)
-		export -UT LD_LIBRARY_PATH=/usr/scheduler/torque/lib:$LD_LIBRARY_PATH ld_library_path
-		export -UT LD_LIBRARY_PATH=/usr/local/supermongo/lib:$LD_LIBRARY_PATH ld_library_path
-		export -UT LD_LIBRARY_PATH=/usr/local/python/lib:$LD_LIBRARY_PATH ld_library_path
-		export -UT LD_LIBRARY_PATH=/usr/local/cuda/lib:$LD_LIBRARY_PATH ld_library_path
-		export -UT PYTHONPATH=~/local/lib/python/site-packages:$PYTHONPATH pythonpath
-		export -UT IDL_STARTUP=~/.idl/idl_startup.pro idl_starup
-		export -UT IDL_PATH=+/home/sinham/utils/idl:$IDL_PATH idl_path
-		export -UT IDL_PATH=.:+/usr/local/idl/idl/lib:+/usr/local/idl/idl/:$IDL_PATH idl_path
-		;;
-	( astro   )
-		path=(/usr/local/python64/bin                       # Python path (64 bit)
-		      ~/local/bin                                   # User specific path
-		      $path)
-		export -UT LD_LIBRARY_PATH=/usr/local/python64/lib:$LD_LIBRARY_PATH ld_library_path
-		export -UT PYTHONPATH=~/local/lib/python/latest/site-packages:$PYTHONPATH pythonpath
-		export -UT PYTHONPATH=/usr/local/python64/lib/python*/site-packages:$PYTHONPATH pythonpath
-		source /usr/local/itt/idl80/idl/bin/idl_setup.bash
-		export IDL_PATH=.:/home/sinham/psu/utils/idl/:+$IDL_DIR
-		export IDL_STARTUP=~/.idl/idl_startup.pro
-		;;
-	( linux   )
-		path=(~/Local/bin $path)                            # User specific path
-		export -UT PYTHONPATH=~/Local/lib/python/python-2.7/site-packages:$PYTHONPATH pythonpath
-		export -UT PYTHONPATH=~/Local/lib/python/latest/site-packages:$PYTHONPATH pythonpath
-		export -UT PYTHONPATH=~/Local/lib/python3/site-packages:$PYTHONPATH pythonpath
-		export -UT TEXINPUTS=.:./style:$TEXINPUTS texinputs
-		export -UT BSTINPUTS=.:./style:$BSTINPUTS bstinputs
-		export -UT BIBINPUTS=.:./style:$BIBINPUTS bibinputs
-		;;
-	( osx     )
-		path=(~/Local/bin                                   # User specific path
-		      /usr/local/opt/coreutils/libexec/gnubin       # Gnu coreutils from Homebrew
-		      /usr/local/opt/findutils/libexec/gnubin       # Gnu find from Homebrew
-		      /usr/local/opt/grep/libexec/gnubin            # Gnu grep from Homebrew
-		      /usr/local/opt/gnu-sed/libexec/gnubin         # Gnu sed from Homebrew
-		      /usr/local/opt/gnu-indent/libexec/gnubin      # Gnu indent from Homebrew
-		      /usr/local/opt/gnu-tar/libexec/gnubin         # Gnu tar from Homebrew
-		      /usr/local/opt/python/libexec/bin             # Unversioned python3
-		      $path)
-		export -UT PYTHONPATH=~/Local/lib/python/latest/site-packages:$PYTHONPATH pythonpath
-		;;
-esac
-
-export path
-
-
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Shell behavior
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -290,6 +185,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets root)  # options: main brackets pattern cur
 autoload -Uz promptinit && promptinit
 PURE_GIT_PULL=0
 prompt pure
+
 
 
 
