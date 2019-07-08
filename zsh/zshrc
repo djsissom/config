@@ -234,6 +234,10 @@ export GPG_TTY=$(tty)                   # Fix GPG pin prompt bug with git
 export SDL_VIDEO_FULLSCREEN_HEAD=3
 setopt HIST_IGNORE_SPACE
 
+if [[ $HOST == motoko ]]; then
+	export TERM=xterm-256color
+fi
+
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
