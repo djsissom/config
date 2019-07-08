@@ -75,7 +75,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # host-specific aliases
-case "$host" in
+case "$hostenv" in
 	( cluster )
 		alias open='gnome-open'
 		alias freenodes="pbsnodes | grep 'opteron' -A3 -B3  | grep 'state = free' -A2 -B1 | less"
