@@ -54,9 +54,6 @@ fi
 alias xtv='xrandr --output HDMI-0 --auto --same-as DVI-I-1'
 alias mic='echo "Starting jack mic input..." && alsa_in -j mic -d hw:USB -r 192000 -c 2 -p 512 -n 3'
 alias gamepad="xboxdrv --silent --detach-kernel-driver --mimic-xpad" # run as root
-if [[ "$TERM" == rxvt-unicode-256color || "$TERM" == xterm-256color ]]; then
-	alias catimg='catimg -t'
-fi
 
 
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -66,7 +63,6 @@ fi
 alias todo='vim ~/.todo.tp'
 alias tclock='tty-clock -sctb -d 0 -a 10000000 -C 6 -f "%Y/%m/%d"'
 alias netmon="bmon -p eth1,eth0 -b -o curses:'nocolors;bgchar= '"
-alias weather="curl http://wttr.in/Nashville"
 alias kp="kpcli --kdb ~/Local/key/KeePass/master.kdbx --key ~/Local/key/master.key --histfile /dev/null"
 
 
@@ -90,6 +86,8 @@ alias scan-tray='scanimage --format=tiff --device "brother4:bus4;dev1"  --resolu
 alias merge_pdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf'
 alias rm-if-no-screen='for i in *; do if [ ! -e screens/"$i".jpg -a $i != "screens" ]; then rm -Iv $i; fi; done'
 alias pic-dirs-by-date='for i in *.NEF; do dirname=`ll --time-style=full-iso $i | awk '\''{ print $6 }'\''`; mkdir -p $dirname; mv -v $i $dirname; done'
+make_thumbs() { vcsi -g 5x4 -w 1920 -t --grid-spacing 0 "$*"; }
+make_thumbs_big() { vcsi -g 5x20 -w 1920 -t --grid-spacing 0 "$*"; }
 
 
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -102,24 +100,34 @@ alias fcomp='for i in *.flac; do ffprobe $i 2>&1 | grep -i composer; done'
 
 
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# Visuals and sounds
+# Visuals
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 alias blah='while true; do head -c8 /dev/urandom; sleep 0.02; done | hexdump -C'
 alias matrix='unimatrix -afo -s 95 -l nssssSScCgGkkkkkkkk'
 alias pipes='/usr/bin/pipes -t 3 -f 60 -r 8000'
+
+
+#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# Sounds
+#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 #alias engage='play -r 44100 -c2 -n synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +16'
 alias engage='play -c2 -n -t alsa synth whitenoise band -n 100 24 band -n 300 100 gain +16'
-
-
-#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# Functions that can take arguments
-#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-make_thumbs() { vcsi -g 5x4 -w 1920 -t --grid-spacing 0 "$*"; }
-make_thumbs_big() { vcsi -g 5x20 -w 1920 -t --grid-spacing 0 "$*"; }
-say() { echo "$@" | festival --tts; }
 play_midi() { fluidsynth -a alsa -m alsa_seq -j -g 2 -l -i /usr/share/soundfonts/FluidR3_GM.sf2 "$*"; }
+say() { echo "$@" | festival --tts; }
+
+
+#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# More terminal whimsy
+#:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+alias weather="curl http://wttr.in/Nashville"
+alias ponysay='ponysay -b round'
+alias ponythink='ponythink -b ascii'
+if [[ "$TERM" == rxvt-unicode-256color || "$TERM" == xterm-256color ]]; then
+	alias catimg='catimg -t'
+fi
 
 
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
