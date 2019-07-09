@@ -1,8 +1,10 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # .zshenv
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# User-specific ~/.zshenv, generalized for GNU/Linux and Apple OS X
-# Excecuted by zsh for all ((non-)interactive) shells
+# User-specific ~/.zshenv, generalized for GNU/Linux and Apple OS X.  Excecuted
+# by zsh for all ((non-)interactive) shells.  (May need to be installed as
+# ~/.zprofile on OS X due to /etc/zprofile changing path order.  Alternatively
+# rename /etc/zprofile to /etc/zshenv.)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
