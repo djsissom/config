@@ -75,6 +75,9 @@ noremap # #zz
 noremap g* g*zz
 noremap g# g#zz
 
+" Allow saving files with sudo after starting vim
+cmap w!! w !sudo tee > /dev/null %
+
 autocmd FileType plaintex,tex,latex syntax spell toplevel
 autocmd FileType plaintex,tex,latex set tw=80
 autocmd FileType pug,jade set tw=80
