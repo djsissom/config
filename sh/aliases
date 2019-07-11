@@ -187,6 +187,7 @@ case "$hostenv" in
 		alias ssh='if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add -t 28800; fi  && ssh'
 		alias rsync='if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add -t 28800; fi  && rsync'
 		alias man='man -M /usr/local/opt/coreutils/libexec/gnuman:$MANPATH'
+		alias pipes='pipes.sh -t 3 -f 60 -r 8000'
 		;;
 esac
 
