@@ -184,7 +184,6 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(brackets root)  # options: main brackets pattern cur
 
 
 autoload -Uz promptinit && promptinit
-PURE_GIT_PULL=0
 prompt pure
 
 
