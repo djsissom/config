@@ -1,0 +1,298 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# sxhkdrc
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Hotkey bindings for bspwm window management and other miscillaneous functions.
+# Reload configureation settings with <Alt> + <Escape>.
+# Get names from output of `xev` and key/mouse event.
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Reload Settings
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# make sxhkd reload its configuration files:
+alt + Escape
+	pkill -USR1 -x sxhkd
+
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Closing Things
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# exit bspwm
+super + alt + Escape
+	pkill -x panel; bspc quit
+
+# close the current window
+alt + w
+	bspc node --close
+
+# kill the current window
+alt + ctrl + shift + w
+	bspc node --kill
+
+# toggle panel
+alt + super + p
+	{ pkill panel; pkill cat; bspc config top_padding 0 ,\
+	/home/djsissom/.config/bspwm/panel/panel & }
+
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Window Management
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# focus/swap window in <direction>
+alt + {_,shift +} {h,j,k,l}
+	bspc node --{focus,swap} {west,south,north,east}
+
+# preselect window split in <direction>
+alt + ctrl + {h,j,k,l}
+	bspc node --presel-dir \~{west,south,north,east}
+
+# push window edge in <direction>
+alt + super + {h,j,k,l}
+	bspc node --resize {left -10 0,bottom 0 10,top 0 -10,right 10 0}
+
+# pull window edge in <direction>
+alt + super + shift + {h,j,k,l}
+	bspc node --resize {right -10 0,top 0 10,bottom 0 -10,left 10 0}
+
+# move floating window
+alt + super + {Left,Down,Up,Right}
+	bpsc node --move {-10 0,0 10,0 -10,10 0}
+
+# set split of parent node
+alt + {1-9}
+	bspc node @parent --ratio 0.{1-9}
+
+# send window to prev/next monitor/desktop
+alt + {_,ctrl +} shift + bracket{left,right}
+	type={monitor,desktop}; \
+	direction={prev,next}; \
+	bspc node --to-$type $direction; \
+	bspc $type --focus $direction
+
+# toggle window floating/fullscreen/pseudo-tiled
+alt + {s,f,t}
+	bspc node --state \~{floating,fullscreen,pseudo_tiled}
+
+# select window backward/forward in history, preserving order
+alt + {o,i}
+	bspc wm --record-history off; \
+	bspc node --focus {older,newer}; \
+	bspc wm --record-history on
+
+# select window backward/forward in history
+alt + {_,shift} + Tab
+	bspc node --focus {prev.local,next.local}
+
+# swap window with last focused window
+alt + apostrophe
+	bspc node --swap last
+
+# send window to preselection
+alt + Return
+	bspc node --to-node last.!automatic
+
+# select splitting ratio of window
+alt + ctrl + {1-9}
+	bspc node --presel-ratio 0.{1-9}
+
+# focus clockwise/counterclockwise window
+alt + {_,shift + }c
+	bspc node --focus {next,prev}
+
+# swap with biggest window
+alt + shift + b
+	bspc node --swap biggest
+
+# insert receptacle, or clear receptacles on current desktop
+alt + {_,shift} + r
+	insert={true,false}; \
+	$insert && bspc node --insert-receptacle || \
+	for win in `bspc query -N -n .leaf.\!window.local`; do bspc node $win --kill; done
+
+# make fullscreen across all monitors
+super + alt + f
+	bspc node --state \~floating; xdotool getactivewindow windowsize 5920 1080 windowmove 0 0
+	#bspc node -t --state \~floating; bspc config -w focused border_width 0; xdotool getactivewindow windowsize 5920 1080 windowmove 0 0
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-10 0,0 10,0 -10,10 0}
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Desktop Management
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# focus prev/next desktop
+alt + ctrl + bracket{left,right}
+	bspc desktop --focus {prev,next}.local
+
+# focus prev/next desktop, all monitors
+alt + ctrl + {Left,Right}
+	for i in \{1..3\}; do \
+		direction={prev,next}; \
+		bspc desktop --focus $direction; \
+		bspc monitor --focus $direction; \
+	done
+
+# flip the tree horizonally/vertically
+alt + {_,super +} {_,shift +} slash
+	bspc node @{/,parent} --flip {vertical,horizontal}
+
+# select nodes (new shortcuts needed)
+alt + {p,b,comma,period}
+	bspc node --focus @{parent,brother,first,second}
+
+# circulate window leaves through tree
+alt + {period,comma}
+	bspc node @parent --circulate {backward,forward}
+
+# rotate tree
+alt + shift + {period,comma}
+	bspc node @parent --rotate {90,270}
+
+# increase/decrease window gap size
+alt + {minus,equal}
+	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 6 ))
+
+# window gap to zero
+alt + super + 0
+	bspc config -d focused window_gap 0
+
+# toggle tiled/monacle layout
+alt + m
+	bspc desktop -l next
+
+# balance windows to occupy equivalent area
+alt + b
+	bspc node -B
+
+# reset windows rooted at node to original split ratio
+alt + e
+	bspc node --equalize
+
+# focus/send window to desktop
+#alt + {_,shift + }{1-9,0}
+#	bspc {desktop -f,window -d} $(bspc query -M -m)/{i,ii,iii,iv,v,vi,vii,viii,ix,x}
+
+# select previous desktop
+alt + grave
+	bspc desktop --focus last
+
+# toggle the private flag to keep a node where it is (?)
+#alt + ctrl + p
+#	bspc node --flag private
+
+# toggle visibility of all windows on current desktop of current monitor
+alt + shift + v
+	bspc node @/ --flag hidden
+
+# toggle visibility of all windows on current desktop of all monitors
+alt + v
+	for i in \{1..3\}; do \
+		bspc monitor --focus next; \
+		bspc node @/ --flag hidden; \
+	done
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Monitor Management
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# focus monitor to the left/right
+alt + bracket{left,right}
+	bspc monitor --focus {prev,next}
+
+# swap monitors
+alt + ctrl + super + bracket{left,right}
+	direction={prev,next}; \
+	bspc desktop --to-monitor $direction; \
+	bspc monitor --focus $direction; \
+	bspc desktop --to-monitor last; \
+	bspc desktop --focus last
+
+# add merged virtual monitor
+alt + ctrl + super + m
+	bspc wm -a merge 5920x1080+0+0
+
+alt + ctrl + super + shift + m
+	bspc monitor merge -r
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# mouse actions
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# close window under pointer (Logitech MX Master)
+button10
+	bspc node pointed --close
+
+# close window under pointer (Logitech MX Master 2S)
+ctrl + alt + Tab
+	bspc node pointed --close
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# wm independent hotkeys
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# open a terminal
+alt + backslash
+	urxvt
+
+# run dmenu launcher
+alt + space
+	dmenu_recent -x 400 -w 1120 -y 525 -h 25 -o 0.75 -dim 0.5 -s 0
+	#XDG_CURRENT_DESKTOP=KDE dmenu_recent -x 400 -w 1120 -y 525 -h 25 -o 0.75 -dim 0.5 -s 0
+
+# volume controls
+XF86AudioRaiseVolume
+	amixer set Speaker 1%+
+
+XF86AudioLowerVolume
+	amixer set Speaker 1%-
+
+XF86AudioMute
+	amixer set PCM toggle
+	#amixer set Speaker toggle
+
+# take a screenshot
+Print
+	scrot -e 'mv $f ~/Images/Screenshots/.'
+
+shift + Print
+	scrot --focused -e 'mv $f ~/Images/Screenshots/.'
+
+alt + Print
+	scrot --select -e 'mv $f ~/Images/Screenshots/.'
+
+# refresh background image
+super + b
+	feh --bg-center --no-xinerama ~/Images/DesktopImages/current
+
+# run xbmc
+super + x
+	env SDL_VIDEO_FULLSCREEN_HEAD=1 kodi
+
+# turn on tv and mirror central monitor
+super + t
+	xrandr --output HDMI-0 --auto --same-as DVI-D-0
+
+# lock screen
+super + l
+	i3lock --ignore-empty-password --show-failed-attempts --image=/home/djsissom/Local/share/wallpaper/current.png
+	#i3lock --ignore-empty-password --tiling --image=/home/djsissom/Local/share/wallpaper/current.png
+	#i3lock --ignore-empty-password --dpms --inactivity-timeout 60 --tiling --image=/home/djsissom/Images/Desktop\ Images/current.png
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# End
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
