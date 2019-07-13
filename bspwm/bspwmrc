@@ -1,12 +1,6 @@
 #! /bin/sh
 
 export PANEL_FIFO="/tmp/djsissom-panel-fifo"
-export PANEL_HEIGHT=18
-#export PANEL_FONT="-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
-export PANEL_FONT='Ubuntu:style=L:size=11:antialias=false'
-export PANEL_FONT2='Symbola:size=10:antialias=true'
-export PANEL_FONT3='Hack:style=Regular:size=10:antialias=false'
-export PANEL_WM_NAME=bspwm_panel
 export XDG_CURRENT_DESKTOP="KDE"
 #export QT_QPA_PLATFORMTHEME="qt5ct"
 export SAL_USE_VCLPLUGIN="kde4"
@@ -129,4 +123,5 @@ done
 #bspc rule -a feh floating=on manage=off
 #
 
-/home/djsissom/.config/bspwm/panel/panel &
+[ -e "$PANEL_FIFO" ] && bspc subscribe report > "$PANEL_FIFO" &
+pgrep -x panel > /dev/null || bspwm-panel &

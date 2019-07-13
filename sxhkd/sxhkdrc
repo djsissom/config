@@ -37,8 +37,12 @@ alt + ctrl + shift + w
 
 # toggle panel
 alt + super + p
-	{ pkill panel; pkill cat; bspc config top_padding 0 ,\
-	/home/djsissom/.config/bspwm/panel/panel & }
+	pgrep -x bspwm-panel > /dev/null && running=yes || running=no; \
+	if [[ "$running" == yes ]]; then; \
+		pkill -x panel; bspc config top_padding 0; \
+	elif [[ "$running" == no ]]; then; \
+		bspwm-panel &; \
+	fi
 
 
 
