@@ -21,25 +21,50 @@ while read -r line ; do
 				item=$1
 				name=${item#?}
 				case $item in
-					[OFU]*)
-						# active desktop
-						wm_infos="$wm_infos%{F#FAE7BF}  ●  %{F-}%{B-}"
+					[mM]*)
+						case $item in
+							m*)
+								on_focused_monitor=
+								;;
+							M*)
+								on_focused_monitor=1
+								;;
+						esac
+						wm_infos="$wm_infos%{F-}    %{F-}"
 						;;
-					o*)
-						# inactive but occupied desktop
-						wm_infos="$wm_infos%{F-}  ●  %{F-}"
-						;;
-					f*)
-						# inactive desktop
-						wm_infos="$wm_infos%{F-}  ○  %{F-}"
-						;;
-					u*)
-						# urgent desktop
-						wm_infos="$wm_infos%{F-}  ●  %{F-}"
+					[fFoOuU]*)
+						case $item in
+							[OF]*)
+								if [ "$on_focused_monitor" ]; then
+									# focused desktop
+									wm_infos="$wm_infos%{F#EEFFFF}  ●  %{F-}"
+								else
+									# active desktop
+									wm_infos="$wm_infos%{F#FAE7BF}  ●  %{F-}"
+								fi
+								;;
+							U*)
+								# urgent focused desktop
+								wm_infos="$wm_infos%{F#FF0000}  ●  %{F-}"
+								;;
+							o*)
+								# inactive but occupied desktop
+								wm_infos="$wm_infos%{F-}  ●  %{F-}"
+								;;
+							f*)
+								# inactive desktop
+								wm_infos="$wm_infos%{F-}  ○  %{F-}"
+								;;
+							u*)
+								# urgent desktop
+								wm_infos="$wm_infos%{F#FF0000}  ○  %{F-}"
+								;;
+						esac
 						;;
 				esac
 				shift
 			done
+			wm_infos="$wm_infos%{F-}    %{F-}"
 			;;
 	esac
 	printf "%s\n" "%{S+}%{l}      $title%{c}$wm_infos%{r}$sys_infos ⏻ "
