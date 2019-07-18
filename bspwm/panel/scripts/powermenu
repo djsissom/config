@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-wm_name='sysmenu'
+wm_name='powermenu'
 
 if xdo id -a "$wm_name" > /dev/null; then
 	pkill -f "dzen2 -title-name $wm_name"
@@ -12,13 +12,10 @@ color5="#FFFFFF"
 
 screen=1
 
-out="Start
-urxvt
-dolphin
-firefox
-clementine
-keepassxc
-ktorrent"
+out="Power
+lock
+reboot
+shutdown"
 
 lines=$(echo -e "$out" | wc -l)
 
@@ -27,7 +24,7 @@ echo -e "$out" | dzen2 \
 	-title-name "$wm_name" \
 	-bg "$color0" \
 	-fg "$color5" \
-	-x "2" \
+	-x "-242" \
 	-y "20" \
 	-l $((lines-1)) \
 	-h 30 \
