@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+wm_name='calendar'
+
+if xdo id -a "$wm_name" > /dev/null; then
+	xdo kill $(xdo id -a "$wm_name")
+else
+	calendar &
+fi
