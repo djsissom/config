@@ -1,0 +1,43 @@
+#!/usr/bin/env sh
+
+wm_name='sysmenu'
+
+if xdo id -a "$wm_name" > /dev/null; then
+	pkill -f "dzen2 -title-name $wm_name"
+	exit
+fi
+
+color0="#000000"
+color5="#FFFFFF"
+
+screen=1
+
+out="Start
+urxvt
+dolphin
+firefox
+clementine
+keepassxc
+ktorrent"
+
+lines=$(echo -e "$out" | wc -l)
+
+
+echo -e "$out" | dzen2 \
+	-title-name "sysmenu" \
+	-bg "$color0" \
+	-fg "$color5" \
+	-x "2" \
+	-y "20" \
+	-l $((lines-1)) \
+	-h 30 \
+	-w 240 \
+	-fn "Source Code Pro" \
+	-e "onstart=uncollapse;button1=menuexec,exit;button3=exit" \
+	-ta c \
+	-sa c \
+	-xs $screen \
+	-m \
+	-p &
+
+
