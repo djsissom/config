@@ -170,11 +170,13 @@ case "$hostenv" in
 		alias open='kde-open5'
 		alias ssh='eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && ssh'
 		alias scp='eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && scp'
+		alias rsync='eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && rsync'
 		my_git() {
 			case $* in
-				( push* ) shift; eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && /usr/bin/git push "$@" ;;
-				( pull* ) shift; eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && /usr/bin/git pull "$@" ;;
-				(     * ) /usr/bin/git "$@" ;;
+				(   push* ) shift; eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && /usr/bin/git push "$@" ;;
+				(   pull* ) shift; eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && /usr/bin/git pull "$@" ;;
+				( remote* ) shift; eval $(/usr/bin/keychain --eval --agents ssh --quick --quiet --timeout 480 ~/.ssh/id_rsa) && /usr/bin/git remote "$@" ;;
+				(       * ) /usr/bin/git "$@" ;;
 			esac
 		}
 		alias git='my_git'
@@ -185,7 +187,17 @@ case "$hostenv" in
 		alias ls='ls --color=auto --literal'
 		alias top='top -o cpu'
 		alias ssh='if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add -t 28800; fi  && ssh'
+		alias scp='if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add -t 28800; fi  && scp'
 		alias rsync='if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add -t 28800; fi  && rsync'
+		my_git() {
+			case $* in
+				(   push* ) shift; if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add -t 28800; fi && /usr/local/bin/git push "$@" ;;
+				(   pull* ) shift; if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add -t 28800; fi && /usr/local/bin/git pull "$@" ;;
+				( remote* ) shift; if [[ `ssh-add -l` == "The agent has no identities." ]]; then ssh-add -t 28800; fi && /usr/local/bin/git remote "$@" ;;
+				(       * ) /usr/local/bin/git "$@" ;;
+			esac
+		}
+		alias git='my_git'
 		alias man='man -M /usr/local/opt/coreutils/libexec/gnuman:$MANPATH'
 		alias pipes='pipes.sh -t 3 -f 60 -r 8000'
 		;;
