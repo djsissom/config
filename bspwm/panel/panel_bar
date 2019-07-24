@@ -33,6 +33,7 @@ while read -r line ; do
 						wm_infos="$wm_infos%{F-}    %{F-}"
 						;;
 					[fFoOuU]*)
+						wm_infos="${wm_infos}%{A:bspc desktop -f ${name}:}"
 						case $item in
 							[OF]*)
 								if [ "$on_focused_monitor" ]; then
@@ -60,6 +61,7 @@ while read -r line ; do
 								wm_infos="$wm_infos%{F#FF0000}  ○  %{F-}"
 								;;
 						esac
+						wm_infos="${wm_infos}%{A}"
 						;;
 				esac
 				shift

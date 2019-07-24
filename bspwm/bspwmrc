@@ -58,9 +58,8 @@ i=1
 #for monitor in $(bspc query -M); do
 for monitor in $(bspc query -M --names); do
 	bspc monitor $monitor \
-			-d $i/{Desktop-2, Desktop-1, Desktop-0, Desktop+1, Desktop+2}
+			-d $i/Desktop-2 $i/Desktop-1 $i/Desktop-0 $i/Desktop+1 $i/Desktop+2
 			#-n "$i" \
-			#-d $i/{I,II,III,IV,V,VI,VII,VIII,IX,X}
 		let i++
 done
 #NMON=$i
