@@ -54,7 +54,8 @@ set smartcase           " Do smart case matching
 "set autowrite          " Automatically save before commands like :next and :make
 "set hidden             " Hide buffers when they are abandoned
 set mouse=a             " Enable mouse usage (all modes)
-set nohlsearch          " Turn off search highlighting
+"set nohlsearch          " Turn off search highlighting
+set hlsearch            " Turn on search highlighting
 "set expandtab           " Turn tabs to spaces
 set shiftwidth=4        " Auto-indent amount when using cindent, <<, >>, etc.
 set softtabstop=4       " How many spaces represent a tab
@@ -67,6 +68,9 @@ set indentkeys-=0#      " Don't un-indent comments
 set nf=octal,hex,alpha	" additional ctrl-a increments
 set spell spelllang=en_us   " Set spell check language
 set scrolloff=5         " Add visible lines beyond cursor at top or bottom of window
+
+" Turn off search highlighting with Enter
+nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 noremap n nzz
 noremap N Nzz
