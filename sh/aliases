@@ -52,7 +52,7 @@ fi
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 alias xtv='xrandr --output HDMI-0 --auto --same-as DVI-I-1'
-alias mic='echo "Starting jack mic input..." && alsa_in -j mic -d hw:USB -r 192000 -c 2 -p 512 -n 3'
+alias mic='echo "Starting jack mic input..." && alsa_in -j mic -d hw:USB -r 192000 -c 2 -p 1024 -n 3'
 alias gamepad="xboxdrv --silent --detach-kernel-driver --mimic-xpad" # run as root
 
 
