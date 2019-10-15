@@ -104,3 +104,13 @@ if filereadable("/etc/vim/vimrc.local")
 endif
 
 syntax spell toplevel
+
+
+call plug#begin('~/.vim/vim-plug')
+
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+call plug#end()
+
+map <C-n> :NERDTreeToggle<CR>
+
