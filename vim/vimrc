@@ -105,12 +105,40 @@ endif
 
 syntax spell toplevel
 
+function! BuildYCM(info)
+	" info is a dictionary with 3 fields
+	" - name:   name of the plugin
+	" - status: 'installed', 'updated', or 'unchanged'
+	" - force:  set on PlugInstall! or PlugUpdate!
+	if a:info.status == 'installed' || a:info.force
+		!./install.py --all
+	endif
+endfunction
+
+let g:YouCompleteMeLazyLoaded = 0
+function! LazyLoadingYMC()
+	if g:YouCompleteMeLazyLoaded == 0
+		let g:YouCompleteMeLazyLoaded = 1
+		call plug#load('YouCompleteMe') | call youcompleteme#Enable()
+	endif
+endfunction
+autocmd BufRead * call timer_start(1, {id->execute('call LazyLoadingYMC()')} )
+"autocmd BufWinEnter * call timer_start(1, {id->execute('call LazyLoadingYMC()')} )
+"autocmd InsertEnter * call LazyLoadingYMC()
+"autocmd CursorHold * call LazyLoadingYMC()
+"autocmd CursorHoldI * call LazyLoadingYMC()
+
 
 call plug#begin('~/.vim/vim-plug')
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM'), 'on': [] }
 
 call plug#end()
 
 map <C-n> :NERDTreeToggle<CR>
+
+
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
 
