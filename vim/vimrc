@@ -135,6 +135,7 @@ call plug#begin('~/.vim/vim-plug')
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM'), 'on': [] }
 Plug 'lervag/vimtex'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
