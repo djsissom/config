@@ -136,7 +136,6 @@ autocmd BufRead * call timer_start(1, {id->execute('call LazyLoadingYMC()')} )
 "autocmd CursorHold * call LazyLoadingYMC()
 "autocmd CursorHoldI * call LazyLoadingYMC()
 
-
 call plug#begin('~/.vim/vim-plug')
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -154,6 +153,8 @@ nnoremap <F2> :ALEToggle<CR>
 
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+
+let g:ale_enabled = 0
 
 " enable vimtex completions for YCM
 if !exists('g:ycm_semantic_triggers')
