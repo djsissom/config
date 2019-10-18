@@ -72,12 +72,19 @@ set scrolloff=5         " Add visible lines beyond cursor at top or bottom of wi
 " Turn off search highlighting with Enter
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
+" Center page on search
 noremap n nzz
 noremap N Nzz
 noremap * *zz
 noremap # #zz
 noremap g* g*zz
 noremap g# g#zz
+
+" Better scrolling keys
+noremap <C-n> <C-e>
+noremap <C-p> <C-y>
+inoremap <C-n> <C-o><C-e>
+inoremap <C-p> <C-o><C-y>
 
 " Allow saving files with sudo after starting vim
 cmap w!! w !sudo tee > /dev/null %
@@ -140,7 +147,9 @@ Plug 'dense-analysis/ale'
 
 call plug#end()
 
-map <C-n> :NERDTreeToggle<CR>
+" press / instead of _
+nnoremap <C-_> :NERDTreeToggle<CR>
+nnoremap <F2> :ALEToggle<CR>
 
 
 let g:ycm_autoclose_preview_window_after_insertion = 1
