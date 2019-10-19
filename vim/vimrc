@@ -152,6 +152,12 @@ call plug#end()
 " press / instead of _
 nnoremap <C-_> :NERDTreeToggle<CR>
 nnoremap <F2> :ALEToggle<CR>
+nmap <silent> [W <Plug>(ale_first)
+nmap <silent> ]W <Plug>(ale_last)
+nmap <silent> [w <Plug>(ale_previous_wrap)
+nmap <silent> ]w <Plug>(ale_next_wrap)
+nmap <silent> [e <Plug>(ale_previous_wrap_error)
+nmap <silent> ]e <Plug>(ale_next_wrap_error)
 
 
 let g:ycm_autoclose_preview_window_after_insertion = 1
