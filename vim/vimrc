@@ -141,8 +141,11 @@ call plug#begin('~/.vim/vim-plug')
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM'), 'on': [] }
 Plug 'lervag/vimtex'
-Plug 'tpope/vim-surround'
 Plug 'dense-analysis/ale'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-repeat'
 
 call plug#end()
 
