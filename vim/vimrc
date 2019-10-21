@@ -65,9 +65,12 @@ set autoindent    " Indent level of new line set by previous line
 set cindent   " Attempt to intelligently guess level of indent for new line
 set cinkeys-=0#         " Don't un-indent comments
 set indentkeys-=0#      " Don't un-indent comments
-set nf=octal,hex,alpha	" additional ctrl-a increments
+set nf=octal,hex,alpha  " additional ctrl-a increments
 set spell spelllang=en_us   " Set spell check language
 set scrolloff=5         " Add visible lines beyond cursor at top or bottom of window
+set linebreak           " Soft wrap whole words together
+set breakindent         " Indent linebreaks to match
+set showbreak=\ \ \ ⇲   " Visual linebreak indicator
 
 " Turn off search highlighting with Enter
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
@@ -142,6 +145,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM'), 'on': [] }
 Plug 'lervag/vimtex'
 Plug 'dense-analysis/ale'
+Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-speeddating'
