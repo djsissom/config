@@ -1,18 +1,41 @@
-" All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
-" /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
-" you can find below.  If you wish to change any of those settings, you should
-" do it in this file (/etc/vim/vimrc), since debian.vim will be overwritten
-" everytime an upgrade of the vim packages is performed.  It is recommended to
-" make changes after sourcing debian.vim since it alters the value of the
-" 'compatible' option.
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" .vimrc
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" User-specified ~/.vimrc, compatible with vim on GNU/Linux and Apple OS X
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the
-" following enables syntax highlighting by default.
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Functionality setup
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+" Source a global configuration file if available
+if filereadable("/etc/vim/vimrc.local")
+	source /etc/vim/vimrc.local
+endif
+
+" Uncomment the following to have Vim jump to the last position when reopening
+" a file
+if has("autocmd")
+	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" Uncomment the following to have Vim load indentation rules and plugins
+" according to the detected filetype.
+if has("autocmd")
+	filetype plugin indent on
+endif
+
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Syntax highlighting
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 if has("syntax")
 	set t_Co=256
 	syntax on
@@ -32,46 +55,66 @@ endif
 " turn on this option as well
 set background=dark
 
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
-if has("autocmd")
-	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
 
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-if has("autocmd")
-	filetype plugin indent on
-endif
 
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-set showcmd             " Show (partial) command in status line.
-set showmatch           " Show matching brackets.
-set ignorecase          " Do case insensitive matching
-set smartcase           " Do smart case matching
-"set incsearch          " Incremental search
-"set autowrite          " Automatically save before commands like :next and :make
-"set hidden             " Hide buffers when they are abandoned
-set mouse=a             " Enable mouse usage (all modes)
-"set nohlsearch          " Turn off search highlighting
-set hlsearch            " Turn on search highlighting
-"set expandtab           " Turn tabs to spaces
-set shiftwidth=4        " Auto-indent amount when using cindent, <<, >>, etc.
-set softtabstop=4       " How many spaces represent a tab
-set tabstop=4           " Real tab size
-set autoindent    " Indent level of new line set by previous line
-"set smartindent   " Attempt to intelligently guess level of indent for new line
-set cindent   " Attempt to intelligently guess level of indent for new line
-set cinkeys-=0#         " Don't un-indent comments
-set indentkeys-=0#      " Don't un-indent comments
-set nf=octal,hex,alpha  " additional ctrl-a increments
-set spell spelllang=en_us   " Set spell check language
-set scrolloff=5         " Add visible lines beyond cursor at top or bottom of window
-set linebreak           " Soft wrap whole words together
-set breakindent         " Indent linebreaks to match
-set showbreak=\ \ \ ⇲   " Visual linebreak indicator
-set updatetime=100      " Make some plugins snappier
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" General options selection
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+set showcmd                     " Show (partial) command in status line.
+set showmatch                   " Show matching brackets.
+set ignorecase                  " Do case insensitive matching
+set smartcase                   " Do smart case matching
+set mouse=a                     " Enable mouse usage (all modes)
+set hlsearch                    " Turn on search highlighting
+set shiftwidth=4                " Auto-indent amount when using cindent, <<, >>, etc.
+set softtabstop=4               " How many spaces represent a tab
+set tabstop=4                   " Real tab size
+set autoindent                  " Indent level of new line set by previous line
+set cindent                     " Attempt to intelligently guess level of indent for new line
+set cinkeys-=0#                 " Don't un-indent comments
+set indentkeys-=0#              " Don't un-indent comments
+set nf=octal,hex,alpha          " additional ctrl-a increments
+set spell spelllang=en_us       " Set spell check language
+set scrolloff=5                 " Add visible lines beyond cursor at top or bottom of window
+set linebreak                   " Soft wrap whole words together
+set breakindent                 " Indent linebreaks to match
+set showbreak=\ \ \ ⇲           " Visual linebreak indicator
+set updatetime=100              " Make some plugins snappier
+set backspace=indent,eol,start  " Fix OS X backspace behavior
+set ruler                       " Fix OS X missing ruler
+
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Filetype-specific options
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+autocmd FileType plaintex,tex,latex syntax spell toplevel
+autocmd FileType plaintex,tex,latex set tw=80
+autocmd FileType tex,latex let g:tex_flavor = 'latex'
+autocmd FileType pug,jade set tw=80
+autocmd FileType text set tw=80 nocindent
+
+autocmd BufNewFile,BufRead *.cu set filetype=c
+autocmd BufNewFile,BufRead *.tp set filetype=taskpaper
+
+aug python
+	" to override ftype/python.vim
+	autocmd FileType python setlocal ts=4 sts=4 sw=4 noexpandtab
+aug end
+
+syntax spell toplevel
+
+
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Key mapping customizations
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 " Turn off search highlighting with Enter
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
@@ -93,40 +136,28 @@ inoremap <C-p> <C-o><C-y>
 " Allow saving files with sudo after starting vim
 cmap w!! w !sudo tee > /dev/null %
 
-autocmd FileType plaintex,tex,latex syntax spell toplevel
-autocmd FileType plaintex,tex,latex set tw=80
-autocmd FileType pug,jade set tw=80
-autocmd FileType text set tw=80 nocindent
 
-set backspace=indent,eol,start
-set ruler
 
-au BufNewFile,BufRead *.cu set filetype=c
-au BufNewFile,BufRead *.tp set filetype=taskpaper
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Plugin helper functions
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-aug python
-	" to override ftype/python.vim
-	au FileType python setlocal ts=4 sts=4 sw=4 noexpandtab
-aug end
 
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-	source /etc/vim/vimrc.local
-endif
-
-syntax spell toplevel
-let g:tex_flavor = 'latex'
-
+" Build script when installing/updating YouCompleteMe
 function! BuildYCM(info)
 	" info is a dictionary with 3 fields
 	" - name:   name of the plugin
 	" - status: 'installed', 'updated', or 'unchanged'
 	" - force:  set on PlugInstall! or PlugUpdate!
 	if a:info.status == 'installed' || a:info.force
+		" YCM dependencies for --all option:
+		" gcc, make, cmake, python3, clang, mono, go, node.js, npm, rust, jdk8
 		!./install.py --all
 	endif
 endfunction
 
+
+" Pick a more convenient spot for the latency from loading YCM
 let g:YouCompleteMeLazyLoaded = 0
 function! LazyLoadingYMC()
 	if g:YouCompleteMeLazyLoaded == 0
@@ -135,27 +166,62 @@ function! LazyLoadingYMC()
 	endif
 endfunction
 autocmd BufRead * call timer_start(1, {id->execute('call LazyLoadingYMC()')} )
-"autocmd BufWinEnter * call timer_start(1, {id->execute('call LazyLoadingYMC()')} )
-"autocmd InsertEnter * call LazyLoadingYMC()
-"autocmd CursorHold * call LazyLoadingYMC()
-"autocmd CursorHoldI * call LazyLoadingYMC()
+" (also try BufWinEnter, InsertEnter, or CursorHold and CursorHoldI events)
 
+
+" Enable vimtex completions for YCM
+if !exists('g:ycm_semantic_triggers')
+	let g:ycm_semantic_triggers = {}
+endif
+autocmd VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
+
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Plugin setup with vim-plug
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+" Use with :PlugInstall and :PlugUpdate
+
+" Set custom plugin directory
 call plug#begin('~/.vim/vim-plug')
 
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM'), 'on': [] }
-Plug 'lervag/vimtex'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'dense-analysis/ale'
-Plug 'godlygeek/tabular'
 Plug 'airblade/vim-gitgutter'
+Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
+Plug 'lervag/vimtex'
 
 call plug#end()
 
-" press / instead of _
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Plugin options
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+" Close the YCM preview window automatically
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+" Start with ale linting disabled
+let g:ale_enabled = 0
+
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Plugin key mappings
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+" (optionally press / instead of _ for :NERDTreeToggle)
 nnoremap <C-_> :NERDTreeToggle<CR>
 nnoremap <F2> :ALEToggle<CR>
 nmap <silent> [W <Plug>(ale_first)
@@ -166,14 +232,7 @@ nmap <silent> [e <Plug>(ale_previous_wrap_error)
 nmap <silent> ]e <Plug>(ale_next_wrap_error)
 
 
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
 
-let g:ale_enabled = 0
-
-" enable vimtex completions for YCM
-if !exists('g:ycm_semantic_triggers')
-	let g:ycm_semantic_triggers = {}
-endif
-autocmd VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
-
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" End
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
