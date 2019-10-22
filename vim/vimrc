@@ -71,6 +71,7 @@ set scrolloff=5         " Add visible lines beyond cursor at top or bottom of wi
 set linebreak           " Soft wrap whole words together
 set breakindent         " Indent linebreaks to match
 set showbreak=\ \ \ ⇲   " Visual linebreak indicator
+set updatetime=100      " Make some plugins snappier
 
 " Turn off search highlighting with Enter
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
@@ -146,6 +147,7 @@ Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM'), 'on': [] }
 Plug 'lervag/vimtex'
 Plug 'dense-analysis/ale'
 Plug 'godlygeek/tabular'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-speeddating'
