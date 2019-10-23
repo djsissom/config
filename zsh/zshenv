@@ -81,6 +81,7 @@ case "$hostenv" in
 		      /usr/local/opt/gnu-sed/libexec/gnubin         # Gnu sed from Homebrew
 		      /usr/local/opt/gnu-indent/libexec/gnubin      # Gnu indent from Homebrew
 		      /usr/local/opt/gnu-tar/libexec/gnubin         # Gnu tar from Homebrew
+		      /usr/local/opt/make/libexec/gnubin            # Gnu make from Homebrew
 		      /usr/local/opt/python/libexec/bin             # Unversioned python3
 		      $path)
 		export -UT PYTHONPATH=~/Local/lib/python/latest/site-packages:$PYTHONPATH pythonpath
