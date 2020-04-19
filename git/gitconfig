@@ -1,0 +1,15 @@
+[user]
+	email = daniel@arclet.org
+	name = Daniel Sissom
+	signingkey = C6336D759D54FDA3C891EB624F6B3BB9D34719B7
+[push]
+	default = simple
+[alias]
+	lo = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lg = log --graph --pretty=format:'%C(auto,yellow)%H%C(reset) %C(auto)%d%C(reset)%n%C(auto,green)%cd (%cr)%C(reset)  %C(auto,blue)%an <%ae>%C(reset)  %C(auto,green)%G?%C(reset)%n%n    %s%+b%n'
+[core]
+	excludesfile = /home/djsissom/.gitignore_global
+[merge]
+	ff = false
+[pull]
+	ff = only
