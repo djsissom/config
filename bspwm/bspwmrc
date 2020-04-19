@@ -46,8 +46,8 @@ bspc rule -a *:feh state=floating
 bspc rule -a *:Plugin-container state=floating
 bspc rule -a *:Conky sticky=on manage=off lower=on
 bspc rule -a *:Screenkey manage=off
-bspc rule -a Steam border=off state=floating
-bspc rule -a Stellaris border=off state=fullscreen
+bspc rule -a *:Steam border=off state=floating
+bspc rule -a *:Stellaris border=off state=fullscreen
 #bspc rule -a vlc:vlc state=floating layer=above
 
 bspc config external_rules_command "$HOME/.config/bspwm/external_rules"

@@ -25,6 +25,8 @@ alias la='ls -A'
 alias list='ls -lhA'
 alias tree='tree -Chug'
 alias ds='du -hsc * | sort -h'
+alias rs='rsync -avhP'
+alias Grep='grep -i'
 
 
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -52,7 +54,10 @@ fi
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 alias xtv='xrandr --output HDMI-0 --auto --same-as DVI-I-1'
-alias mic='echo "Starting jack mic input..." && alsa_in -j mic -d hw:USB -r 192000 -c 2 -p 1024 -n 3'
+alias alsa_mic='echo "Starting jack alsa mic input..." && alsa_in -j mic -d hw:USB -r 192000 -c 2 -p 1024 -n 3'
+alias mic='echo "Starting jack mic input..." && jack_connect system:capture_1 system:playback_1 && jack_connect system:capture_1 system:playback_2'
+alias mic_off='echo "Stopping jack mic input..." && jack_disconnect system:capture_1 system:playback_1 && jack_disconnect system:capture_1 system:playback_2'
+alias uber_out='echo "Routing pulse to Schiit..." && $( sleep 2 && jack_connect "PulseAudio JACK Sink:front-left" uber:playback_1 && jack_connect "PulseAudio JACK Sink:front-right" uber:playback_2 ) & alsa_out -j uber -d hw:Uber -r 192000 -c 2 -p 1024 -n 3'
 alias gamepad="xboxdrv --silent --detach-kernel-driver --mimic-xpad" # run as root
 
 
@@ -113,7 +118,7 @@ alias pipes='/usr/bin/pipes -t 3 -f 60 -r 8000'
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 #alias engage='play -r 44100 -c2 -n synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +16'
-alias engage='play -c2 -n -t alsa synth whitenoise band -n 100 24 band -n 300 100 gain +16'
+alias engage='play -c2 -n -t alsa synth whitenoise band -n 100 24 band -n 300 100 gain +20'
 play_midi() { fluidsynth -a alsa -m alsa_seq -j -g 2 -l -i /usr/share/soundfonts/FluidR3_GM.sf2 "$*"; }
 say() { echo "$@" | festival --tts; }
 

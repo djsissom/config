@@ -85,6 +85,10 @@ alt + {_,ctrl +} shift + bracket{left,right}
 alt + {s,f,t}
 	bspc node --state \~{floating,fullscreen,pseudo_tiled}
 
+# force tiled window
+alt + shift + t
+	bspc node --state tiled
+
 # select window backward/forward in history, preserving order
 alt + {o,i}
 	bspc wm --record-history off; \
