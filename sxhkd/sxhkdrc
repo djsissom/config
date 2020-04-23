@@ -105,7 +105,7 @@ alt + apostrophe
 
 # send window to preselection
 alt + Return
-	bspc node --to-node last.!automatic
+	bspc node --to-node last.\!automatic --follow
 
 # select splitting ratio of window
 alt + ctrl + {1-9}
@@ -119,11 +119,27 @@ alt + {_,shift + }c
 alt + shift + b
 	bspc node --swap biggest
 
-# insert receptacle, or clear receptacles on current desktop
-alt + {_,shift} + r
-	insert={true,false}; \
-	$insert && bspc node --insert-receptacle || \
+# insert receptacle
+alt + r
+	bspc node --insert-receptacle
+
+# clear receptacles on current desktop
+alt + shift + r
 	for win in `bspc query -N -n .leaf.\!window.local`; do bspc node $win --kill; done
+
+# send window to receptacle on current desktop
+alt + super + Return
+	bspc node --to-node `bspc query -N -n .leaf.\!window.local` --follow
+
+# move node to adjacent receptacle (this doesn't seem to work...)
+alt + ctrl + super + {h,j,k,l}
+	bspc node --to-node `bspc query -N -n {west,south,north,east}`
+
+# move node to receptacle on previous/next monitor/desktop
+alt + {_,shift +} super + bracket{left,right}
+	type={monitor,desktop}; \
+	direction={prev,next}; \
+	bspc node --to-node `bspc query -N --$type $direction -n .leaf.\!window` --follow
 
 # make fullscreen across all monitors
 super + alt + f
