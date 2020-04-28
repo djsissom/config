@@ -230,6 +230,9 @@ endif
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 
+" Suggest language keywords
+let g:ycm_seed_identifiers_with_syntax = 1
+
 " Start with ale linting disabled
 let g:ale_enabled = 0
 
