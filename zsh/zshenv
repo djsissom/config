@@ -85,6 +85,7 @@ case "$hostenv" in
 		      /usr/local/opt/python/libexec/bin             # Unversioned python3
 		      $path)
 		export -UT PYTHONPATH=~/Local/lib/python/latest/site-packages:$PYTHONPATH pythonpath
+		export -UT GOPATH=~/Local/lib/go gopath
 		;;
 esac
 
