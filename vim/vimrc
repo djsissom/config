@@ -124,6 +124,8 @@ syntax spell toplevel
 
 
 " Turn off search highlighting with Enter
+nnoremap <silent> <C-@> :nohlsearch<CR>
+nnoremap <silent> <C-l> :GitGutter<CR>:nohlsearch<CR><C-l>
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 " Center page on search
