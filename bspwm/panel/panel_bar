@@ -12,6 +12,10 @@ while read -r line ; do
 			# xtitle output
 			title="%{F-}${line#?}%{F-}"
 			;;
+		M*)
+			# mic mute output
+			mic="%{F-}${line#?}%{F-}"
+			;;
 		W*)
 			# bspwm state
 			wm_infos=""
@@ -69,5 +73,5 @@ while read -r line ; do
 			wm_infos="$wm_infos%{F-}    %{F-}"
 			;;
 	esac
-	printf "%s\n" "%{S+}%{l}%{A:sysmenu:}      %{A}$title%{c}$wm_infos%{r}%{A:togglecal:}$sys_infos%{A} %{A:powermenu:}⏻%{A} "
+	printf "%s\n" "%{S+}%{l}%{A:sysmenu:}      %{A}$title%{c}$wm_infos%{r}$mic  %{A:togglecal:}$sys_infos%{A} %{A:powermenu:}⏻%{A} "
 done

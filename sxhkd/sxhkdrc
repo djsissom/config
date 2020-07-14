@@ -25,7 +25,8 @@ alt + Escape
 
 # exit bspwm
 super + alt + Escape
-	pkill -x panel; bspc quit
+	xlogout
+#	pkill -x panel; bspc quit
 
 # close the current window
 alt + w
@@ -285,7 +286,8 @@ XF86AudioLowerVolume
 	amixer set Speaker 1%-
 
 XF86AudioMute
-	amixer set PCM toggle
+	togglemute
+	#amixer set PCM toggle
 	#amixer set Speaker toggle
 
 # take a screenshot
