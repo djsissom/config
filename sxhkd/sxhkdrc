@@ -280,10 +280,12 @@ alt + space
 
 # volume controls
 XF86AudioRaiseVolume
-	amixer set Speaker 1%+
+	true
+	#amixer set Speaker 1%+
 
 XF86AudioLowerVolume
-	amixer set Speaker 1%-
+	true
+	#amixer set Speaker 1%-
 
 XF86AudioMute
 	togglemute
@@ -311,6 +313,10 @@ super + x
 # turn on tv and mirror central monitor
 super + {_, alt +} t
 	xrandr --output HDMI-0 {--auto --same-as DVI-D-0, --off}
+
+# lock screen
+XF86Sleep
+	i3lock --ignore-empty-password --show-failed-attempts --image=/home/djsissom/Local/share/wallpaper/current.png
 
 # lock screen
 super + l
