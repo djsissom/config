@@ -118,8 +118,8 @@ alias pipes='/usr/bin/pipes -t 3 -f 60 -r 8000'
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 #alias engage='play -r 44100 -c2 -n synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +16'
-alias engage='play -c2 -n -t alsa synth whitenoise band -n 100 24 band -n 300 100 gain +20'
-alias waves='play -c2 -n -t alsa synth brownnoise mix synth 0 0 0 15 40 80 trapezium amod 0.1 30'
+#alias engage='play -c2 -n -t alsa synth whitenoise band -n 100 24 band -n 300 100 gain +20'
+#alias waves='play -c2 -n -t alsa synth brownnoise mix synth 0 0 0 15 40 80 trapezium amod 0.1 30'
 play_midi() { fluidsynth -a alsa -m alsa_seq -j -g 2 -l -i /usr/share/soundfonts/FluidR3_GM.sf2 "$*"; }
 say() { echo "$@" | festival --tts; }
 

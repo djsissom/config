@@ -292,6 +292,15 @@ XF86AudioMute
 	#amixer set PCM toggle
 	#amixer set Speaker toggle
 
+ctrl + XF86AudioPlay
+	true
+
+ctrl + XF86AudioPrev
+	togglewaves
+
+ctrl + XF86AudioNext
+	toggleengage
+
 # take a screenshot
 Print
 	scrot -e 'mv $f ~/Images/Screenshots/.'
