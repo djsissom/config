@@ -104,6 +104,7 @@ autocmd FileType plaintex,tex,latex set tw=80
 autocmd FileType tex,latex let g:tex_flavor = 'latex'
 autocmd FileType pug,jade set tw=80
 autocmd FileType text set tw=80 nocindent
+autocmd FileType swift set noexpandtab
 
 autocmd BufNewFile,BufRead *.cu set filetype=c
 autocmd BufNewFile,BufRead *.tp set filetype=taskpaper
