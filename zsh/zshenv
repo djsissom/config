@@ -72,6 +72,7 @@ case "$hostenv" in
 		export -UT TEXINPUTS=.:./style:$TEXINPUTS texinputs
 		export -UT BSTINPUTS=.:./style:$BSTINPUTS bstinputs
 		export -UT BIBINPUTS=.:./style:$BIBINPUTS bibinputs
+		export -UT NODE_PATH=~/Local/lib/node/node_modules:$NODE_PATH node_path
 		;;
 	( osx     )
 		path=(~/Local/bin                                   # User specific path

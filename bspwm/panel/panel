@@ -17,7 +17,7 @@ bspc config top_padding $PANEL_HEIGHT
 xtitle -sf 'T%s\n' | sed -u 's/^\(.................................................\).*\(..........................\)/\1...\2/' > "$PANEL_FIFO" &
 bspc subscribe report > "$PANEL_FIFO" &
 tick > "$PANEL_FIFO" &
-while true; do [ -f /tmp/djsissom-jackmute ] && echo 'M' > "$PANEL_FIFO" || echo 'M' > "$PANEL_FIFO"; sleep 0.1; done &
+while true; do [ -f /tmp/djsissom-jackmute ] && echo 'P' > "$PANEL_FIFO" || echo 'P' > "$PANEL_FIFO"; sleep 0.1; done &
 
 ~/.config/bspwm/panel/panel_bar < "$PANEL_FIFO" | lemonbar -n "$PANEL_WM_NAME" -g "x$PANEL_HEIGHT" -a 20 -B "#BF000000" -F "#FF9A875F" -f "$PANEL_FONT" -f "$PANEL_FONT2" -f "$PANEL_FONT3" | sh &
 

@@ -53,7 +53,8 @@ fi
 # Quick setup and fixes
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-alias xtv='xrandr --output HDMI-0 --auto --same-as DVI-I-1'
+#alias xtv='xrandr --output HDMI-0 --auto --same-as DVI-I-1'
+alias xtv='xrandr --output HDMI-0 --mode 1920x1080 --rate 60 --same-as DVI-D-0'
 alias alsa_mic='echo "Starting jack alsa mic input..." && alsa_in -j mic -d hw:USB -r 192000 -c 2 -p 1024 -n 3'
 alias mic='echo "Starting jack mic input..." && jack_connect system:capture_1 system:playback_1 && jack_connect system:capture_1 system:playback_2'
 alias mic_off='echo "Stopping jack mic input..." && jack_disconnect system:capture_1 system:playback_1 && jack_disconnect system:capture_1 system:playback_2'
@@ -67,7 +68,7 @@ alias gamepad="xboxdrv --silent --detach-kernel-driver --mimic-xpad" # run as ro
 
 alias todo='vim ~/.todo.tp'
 alias tclock='tty-clock -sctb -d 0 -a 10000000 -C 6 -f "%Y/%m/%d"'
-alias netmon="bmon -p eth1,eth0 -b -o curses:'nocolors;bgchar= '"
+alias netmon="bmon -p eth0,eth1 -b -o curses:'nocolors;bgchar= '"
 alias kp="kpcli --kdb ~/Local/key/KeePass/master.kdbx --key ~/Local/key/master.key --histfile /dev/null"
 
 
@@ -90,6 +91,7 @@ alias scan-flatbed='scanimage --format=tiff --device "brother4:bus4;dev2"  --res
 alias scan-tray='scanimage --format=tiff --device "brother4:bus4;dev1"  --resolution 600'
 alias merge_pdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf'
 alias rm-if-no-screen='for i in *; do if [ ! -e screens/"$i".jpg -a $i != "screens" ]; then rm -Iv $i; fi; done'
+alias rm-if-no-screen-alt='for i in *; do if [ ! -e "../screens/`basename $i .mp4` s.jpg" ];  then rm -Iv $i; fi; done'
 alias pic-dirs-by-date='for i in *.NEF; do dirname=`ll --time-style=full-iso $i | awk '\''{ print $6 }'\''`; mkdir -p $dirname; mv -v $i $dirname; done'
 make_thumbs() { vcsi -g 5x4 -w 1920 -t --grid-spacing 0 "$*"; }
 make_thumbs_big() { vcsi -g 5x20 -w 1920 -t --grid-spacing 0 "$*"; }
