@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+(stoppulse2jack && pkill jackd) &
+pkill -x panel
+bspc quit

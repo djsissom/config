@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+
+xset r rate 200 60					# Set keyboard delay in ms and repeat frequency in Hz
+setxkbmap -option ctrl:swapcaps		# Swap CapsLock with left CTRL
+xsetroot -cursor_name left_ptr		# Change cursor to left pointer instead of X on root window
+xset dpms 3660 3660 3660			# Set monitor power off
+xset s 3600							# Set screensaver timeout
+xset b off							# Disable PC speaker beep
+xset +fp /usr/share/fonts/local		# Font dirs
+xset +fp /usr/share/fonts/misc
+xset fp rehash
+
+compton &							# compositing
+#picom -d							# compositing
+numlockx &							# turn on numlock
+#unclutter -root &					# hide mouse cursor when not in use
+feh --bg-center --no-xinerama ~/Images/Desktop\ Images/current &	# set background image
+#jackd -t 4000 -X alsa_midi -d alsa -d hw:Uber -r 192000 -p 1024 -n 3 &		# start jack audio server
+jackd -t 4000 -X alsa_midi -d alsa -d hw:USB -r 192000 -p 512 -n 3 &		# start jack audio server
+#(sleep 3 && loop2jack) &			# set up loopback connections for alsa programs
+(sleep 1 && pulse2jack) &			# set up pulseaudio bridge to jack
+
