@@ -102,7 +102,7 @@ alt + {_,shift} + Tab
 
 # swap window with last focused window
 alt + apostrophe
-	bspc node --swap last
+	bspc node --swap last --follow
 
 # send window to preselection
 alt + Return
@@ -261,8 +261,8 @@ button10
 	bspc node pointed --close
 
 # close window under pointer (Logitech MX Master 2S)
-ctrl + alt + Tab
-	bspc node pointed --close
+#ctrl + alt + Tab
+	#bspc node pointed --close
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
