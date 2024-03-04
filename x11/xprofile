@@ -12,8 +12,7 @@ xset +fp /usr/share/fonts/local		# Font dirs
 xset +fp /usr/share/fonts/misc
 xset fp rehash
 
-compton &							# compositing
-#picom -d							# compositing
+picom -b							# compositing
 numlockx &							# turn on numlock
 #unclutter -root &					# hide mouse cursor when not in use
 feh --bg-center --no-xinerama ~/Images/Desktop\ Images/current &	# set background image
