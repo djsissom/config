@@ -19,6 +19,8 @@
 
 alias u='cd ..'
 alias back='cd "$OLDPWD"'
+alias dh='pwd | xclip -i'
+alias dg='cd "`xclip -o`"'
 alias ls='ls --literal'
 alias ll='ls -lh'
 alias la='ls -A'
@@ -87,8 +89,8 @@ alias balance='curl http://www.middlecoin.com/allusers.html | grep -B 3 -A 3 1Ho
 
 alias batch-unzip='for i in *.zip; do newdir="$i:gs/.zip/"; mkdir "$newdir"; unzip -d "$newdir" "$i"; done'
 #alias scanimage='scanimage --format=tiff --device pixma:04A91747_80650C --resolution 300'
-alias scan-flatbed='scanimage --format=tiff --device "brother4:bus4;dev2"  --resolution 600 --source FlatBed'
-alias scan-tray='scanimage --format=tiff --device "brother4:bus4;dev1"  --resolution 600'
+alias scan-flatbed='scanimage --format=png --device "brother4:bus4;dev2"  --resolution 600 --source FlatBed'
+alias scan-tray='scanimage --format=png --device "brother4:bus4;dev1"  --resolution 600'
 alias merge_pdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf'
 alias rm-if-no-screen='for i in *; do if [ ! -e screens/"$i".jpg -a $i != "screens" ]; then rm -Iv $i; fi; done'
 alias rm-if-no-screen-alt='for i in *; do if [ ! -e "../screens/`basename $i .mp4` s.jpg" ];  then rm -Iv $i; fi; done'
