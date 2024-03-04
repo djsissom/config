@@ -13,6 +13,7 @@ xset +fp /usr/share/fonts/misc
 xset fp rehash
 
 picom -b							# compositing
+dunst &								# notifications
 numlockx &							# turn on numlock
 #unclutter -root &					# hide mouse cursor when not in use
 feh --bg-center --no-xinerama ~/Images/Desktop\ Images/current &	# set background image
