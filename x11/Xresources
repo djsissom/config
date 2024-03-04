@@ -59,8 +59,7 @@ URxvt.boldFont:				xft:Hack:style=Bold:size=10:antialias=true, \
 							xft:Hack Nerd Font Mono:style=Regular:size=10
 
 ! Clickable URLs
-URxvt.perl-ext-common:		default,matcher,vtwheel,config-reload
-!URxvt.perl-ext-common:		default,matcher,vtwheel,font-size,config-reload
+URxvt.perl-ext-common:		default,matcher,vtwheel,config-reload,font-size
 URxvt.url-launcher:			/usr/bin/firefox
 URxvt.matcher.button:		1
 
@@ -69,10 +68,8 @@ URxvt.matcher.button:		1
 
 ! Change font size
 ! see /usr/share/doc/urxvt-font-size-git/README.markdown for details
-!URxvt.keysym.C-equal:		perl:font-size:increase
-!URxvt.keysym.C-minus:		perl:font-size:decrease
-URxvt.keysym.C-equal:		resize-font:bigger
-URxvt.keysym.C-minus:		resize-font:smaller
+URxvt.keysym.C-equal:		font-size:increase
+URxvt.keysym.C-minus:		font-size:decrease
 
 ! Do not scroll with output
 URxvt.scrollTtyOutput:		false
