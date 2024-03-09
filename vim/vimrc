@@ -227,6 +227,7 @@ if g:use_pluggin_manager == 1
 	Plug 'tpope/vim-unimpaired'
 	Plug 'tpope/vim-speeddating'
 	Plug 'tpope/vim-repeat'
+	Plug 'tpope/vim-fugitive'
 	Plug 'lervag/vimtex'
 	Plug 'junegunn/goyo.vim'
 	Plug 'junegunn/limelight.vim'
