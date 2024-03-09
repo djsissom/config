@@ -135,6 +135,9 @@ nnoremap <silent> <C-@> :nohlsearch<CR>
 nnoremap <silent> <C-l> :GitGutter<CR>:nohlsearch<CR><C-l>
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
+" Yank to global clipboard
+noremap Y "+y
+
 " Center page on search (breaks 'search hit bottom...' message)
 "noremap n nzz
 "noremap N Nzz
