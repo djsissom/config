@@ -96,6 +96,7 @@ set showbreak=\ \ \ ⇲           " Visual linebreak indicator
 set updatetime=100              " Make some plugins snappier
 set backspace=indent,eol,start  " Fix OS X backspace behavior
 set ruler                       " Fix OS X missing ruler
+"set nowrap
 
 
 
