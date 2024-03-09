@@ -177,17 +177,17 @@ endfunction
 
 
 " Pick a more convenient spot for the latency from loading YCM
-let g:YouCompleteMeLazyLoaded = 0
-function! LazyLoadingYMC()
-	if g:YouCompleteMeLazyLoaded == 0
-		let g:YouCompleteMeLazyLoaded = 1
-		call plug#load('YouCompleteMe') | call youcompleteme#Enable()
-	endif
-endfunction
-if g:use_pluggin_manager == 1
-	autocmd BufRead * call timer_start(1, {id->execute('call LazyLoadingYMC()')} )
-	" (also try BufWinEnter, InsertEnter, or CursorHold and CursorHoldI events)
-endif
+"let g:YouCompleteMeLazyLoaded = 0
+"function! LazyLoadingYMC()
+"	if g:YouCompleteMeLazyLoaded == 0
+"		let g:YouCompleteMeLazyLoaded = 1
+"		call plug#load('YouCompleteMe') | call youcompleteme#Enable()
+"	endif
+"endfunction
+"if g:use_pluggin_manager == 1
+"	autocmd BufRead * call timer_start(1, {id->execute('call LazyLoadingYMC()')} )
+"	" (also try BufWinEnter, InsertEnter, or CursorHold and CursorHoldI events)
+"endif
 
 
 " Enable vimtex completions for YCM
