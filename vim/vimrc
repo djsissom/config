@@ -120,6 +120,11 @@ aug python
 	autocmd FileType python setlocal ts=4 sts=4 sw=4 noexpandtab
 aug end
 
+aug python
+	" to override ftype/python.vim
+	autocmd FileType scss setlocal ts=4 sts=4 sw=4 noexpandtab
+aug end
+
 syntax spell toplevel
 
 
