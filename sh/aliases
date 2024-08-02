@@ -19,8 +19,8 @@
 
 alias u='cd ..'
 alias back='cd "$OLDPWD"'
-alias dh='pwd | xclip -i'
-alias dg='cd "`xclip -o`"'
+alias gh='pwd | xclip -i'
+alias gd='cd "`xclip -o`"'
 alias ls='ls --literal'
 alias ll='ls -lh'
 alias la='ls -A'
@@ -112,7 +112,7 @@ alias fcomp='for i in *.flac; do ffprobe $i 2>&1 | grep -i composer; done'
 # Visuals
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-alias blah='while true; do head -c8 /dev/urandom; sleep 0.02; done | hexdump -C'
+alias blah='while true; do head -c8 /dev/urandom; sleep 0.05; done | hexdump -C'
 alias matrix='unimatrix -afo -s 95 -l nssssSScCgGkkkkkkkk'
 alias pipes='/usr/bin/pipes -t 3 -f 60 -r 8000'
 
@@ -149,8 +149,6 @@ if [ -x /usr/bin/dircolors ]; then
 	alias ls='ls --color=auto --literal'
 	alias diff='diff --color=auto'
 	alias grep='grep --color=auto'
-	alias fgrep='fgrep --color=auto'
-	alias egrep='egrep --color=auto'
 	export -UT LS_COLORS=$LS_COLORS'ow=34;7:' ls_colors
 fi
 
