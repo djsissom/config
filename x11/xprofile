@@ -11,6 +11,8 @@ xset b off							# Disable PC speaker beep
 xset +fp /usr/share/fonts/local		# Font dirs
 xset +fp /usr/share/fonts/misc
 xset fp rehash
+export QT_QPA_PLATFORMTHEME=kde
+#export QT_QPA_PLATFORMTHEME=qt6ct
 
 picom -b							# compositing
 dunst &								# notifications
