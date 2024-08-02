@@ -53,7 +53,7 @@ alt + super + p
 
 # focus/swap window in <direction>
 alt + {_,shift +} {h,j,k,l}
-	bspc node --{focus,swap} {west,south,north,east}
+	bspc node --{focus,swap} {west,south,north,east} --follow
 
 # preselect window split in <direction>
 alt + ctrl + {h,j,k,l}
@@ -275,7 +275,7 @@ alt + backslash
 
 # run dmenu launcher
 alt + space
-	dmenu_recent -x 400 -w 1120 -y 525 -h 25 -o 0.75 -dim 0.5 -s 0
+	dmenu_recent -x 400 -w 1120 -y 525 -h 25 -o 0.75 -dim 0.5 -s 2
 	#XDG_CURRENT_DESKTOP=KDE dmenu_recent -x 400 -w 1120 -y 525 -h 25 -o 0.75 -dim 0.5 -s 0
 
 # volume controls
