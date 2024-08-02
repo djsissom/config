@@ -24,7 +24,7 @@ fi
 
 
 zstyle ':completion:*' auto-description 'Specify parameter: %d'
-zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate _files
 zstyle ':completion:*' completions 1
 zstyle ':completion:*' expand prefix suffix
 zstyle ':completion:*' format 'Completing %d...'
