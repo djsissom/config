@@ -4,6 +4,7 @@ export PANEL_FIFO="/tmp/djsissom-panel-fifo"
 export XDG_CURRENT_DESKTOP="KDE"
 #export QT_QPA_PLATFORMTHEME="qt5ct"
 export SAL_USE_VCLPLUGIN="kde4"
+export XDG_MENU_PREFIX=plasma- systemctl --user import-environment XDG_MENU_PREFIX dbus-update-activation-environment XDG_MENU_PREFIX
 
 
 
@@ -70,6 +71,7 @@ for i in {1..6}; do
 	bspc desktop --focus next;
 	bspc monitor --focus next;
 done
+bspc monitor --focus next;
 
 #bspc monitor -r Desktop2
 

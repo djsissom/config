@@ -10,7 +10,7 @@ fi
 color0="#000000"
 color5="#FFFFFF"
 
-screen=1
+screen=3
 
 out="Power
 lock
