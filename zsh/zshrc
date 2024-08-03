@@ -12,7 +12,7 @@
 # Hack to fix urxvt starting with a prompt in the middle - delete when fixed
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-if [[ `ps ho command $(ps ho ppid $$)` == 'urxvt' ]]; then
+if [[ $hostenv == 'linux' && `ps ho command $(ps ho ppid $$)` == 'urxvt' ]]; then
 	clear
 fi
 
