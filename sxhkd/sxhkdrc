@@ -275,7 +275,7 @@ alt + backslash
 
 # run dmenu launcher
 alt + space
-	dmenu_recent -x 400 -w 1120 -y 525 -h 25 -o 0.75 -dim 0.5 -s 2
+	dmenu_recent -x 400 -w 1120 -y 525 -h 25 -o 0.75 -dim 0.5 -s 3
 	#XDG_CURRENT_DESKTOP=KDE dmenu_recent -x 400 -w 1120 -y 525 -h 25 -o 0.75 -dim 0.5 -s 0
 
 # volume controls
