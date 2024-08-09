@@ -71,7 +71,8 @@ for i in {1..6}; do
 	bspc desktop --focus next;
 	bspc monitor --focus next;
 done
-bspc monitor --focus next;
+
+bspc monitor --focus DP-2
 
 #bspc monitor -r Desktop2
 

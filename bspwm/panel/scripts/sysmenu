@@ -10,7 +10,7 @@ fi
 color0="#000000"
 color5="#FFFFFF"
 
-screen=3
+screen=1
 
 out="Start
 urxvt

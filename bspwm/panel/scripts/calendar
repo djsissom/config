@@ -10,7 +10,7 @@ ORIG_IFS=$IFS
 IFS=" " read current_month current_year <<< $(date +"%m %Y")
 IFS=$ORIG_IFS
 
-screen=3
+screen=1
 
 OPTS=`getopt -o m:y:s: -- "$@"`
 eval set -- "$OPTS"
