@@ -96,6 +96,7 @@ set showbreak=\ \ \ ⇲           " Visual linebreak indicator
 set updatetime=100              " Make some plugins snappier
 set backspace=indent,eol,start  " Fix OS X backspace behavior
 set ruler                       " Fix OS X missing ruler
+set noexpandtab
 "set nowrap
 
 
@@ -120,9 +121,14 @@ aug python
 	autocmd FileType python setlocal ts=4 sts=4 sw=4 noexpandtab
 aug end
 
-aug python
-	" to override ftype/python.vim
+aug scss
+	" to override ftype/scss.vim
 	autocmd FileType scss setlocal ts=4 sts=4 sw=4 noexpandtab
+aug end
+
+aug markdown
+	" to override ftype/scss.vim
+	autocmd FileType markdown setlocal ts=4 sts=4 sw=4 noexpandtab
 aug end
 
 syntax spell toplevel
